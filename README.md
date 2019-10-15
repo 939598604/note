@@ -56,4 +56,4 @@
 
 ### 6.部署到githup
 
-将本docsify代码提交到githup，
+将本docsify代码提交到githup，打开githup page功能，如用域名访问必须提交域名文件。
