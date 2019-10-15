@@ -5,15 +5,15 @@
 ### 1.template文件目录结构
 
 ```shell
---------------------------------  
-  |-----template基本使用（文件夹）
-       |-----001.文档一.md
-       |-----002.文档二.md
-  |-----template源码学习（文件夹）
-       |-----001.文档一.md
-       |-----002.文档二.md
-  |-----_sidebar.md
-  |-----README.md
+|-----------------docs（文件夹）
+|    |-----template基本使用（文件夹）
+|    |    |-----001.文档一.md
+|    |    |-----002.文档二.md
+|    |-----template源码学习（文件夹）
+|    |    |-----001.文档一.md
+|    |    |-----002.文档二.md
+|    |-----_sidebar.md
+|    |-----README.md
 ```
 
 - _sidebar.md 是进入到template目录下的侧边栏
@@ -32,8 +32,23 @@
   ```markdown
   * **Flume-ng**
     * **Flume-ng基本使用**
-      * [（一）安装部署](docs/Flume/Flume-ng基本使用/001.安装部署.md)
-      * [（二）自定义Sink](docs/Flume/Flume-ng基本使用/004.自定义Sink.md)
+      * [（一）安装部署](docs/大数据/Flume/Flume-ng基本使用/001.安装部署.md)
+  	* [（二）利用tail来采集数据到HDFS](docs/大数据/Flume/Flume-ng基本使用/002.利用tail来采集数据到HDFS.md)
+      * [（三）自定义Source](docs/大数据/Flume/Flume-ng基本使用/003.自定义Source.md)
+      * [（四）自定义Sink](docs/大数据/Flume/Flume-ng基本使用/004.自定义Sink.md)
+      * [（五）自定义Intercetor](docs/大数据/Flume/Flume-ng基本使用/005.自定义Intercetor.md)		
+    * **Flume-ng源码学习** 
+      * [（一）入口程序启动分析](docs/大数据/Flume/Flume-ng源码/01.入口程序启动分析.md)
+      * [（二）Source组件分析](docs/大数据/Flume/Flume-ng源码/02.Source组件.md)
+      * [（三）avroSource分析](docs/大数据/Flume/Flume-ng源码/03.avroSource.md)
+      * [（四）Channel组件分析](docs/大数据/Flume/Flume-ng源码/04.Channel组件.md)
+      * [（五）FileChannel分析](docs/大数据/Flume/Flume-ng源码/05.FileChannel.md)
+      * [（六）MemoryChannel分析](docs/大数据/Flume/Flume-ng源码/06.MemoryChannel.md)
+      * [（七）Sink组件析](docs/Flume/大数据/Flume-ng源码/07.Sink组件.md)
+      * [（八）avroSink分析](docs/大数据/Flume/Flume-ng源码/08.avroSink.md)
+      * [（九）hdfsSink分析](docs/大数据/Flume/Flume-ng源码/09.hdfsSink.md)
+      * [（十）kafkaSink分析](docs/大数据/Flume/Flume-ng源码/10.kafkaSink.md)
+      * [（十一）拦截器Interceptor分析](docs/大数据/Flume/Flume-ng源码/11.拦截器Interceptor.md)
   ```
 
   **大标题** ： Flume-ng
@@ -52,11 +67,11 @@
 
 ```markdown
 * 大数据
-  * [Flume](/docs/Flume/README.md)
-  * [Kafka](/docs/Kafka/README.md)
+  * [Flume](/docs/大数据/Flume/README.md)
+  * [Kafka](/docs/大数据/Kafka/README.md)
 ```
 
-将`Flume`指定到`/docs/Flume/README.md`路径
+将`Flume`指定到`/docs/大数据/Flume/README.md`路径
 
 ### 6.部署到githup
 
