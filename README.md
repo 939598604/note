@@ -1,6 +1,6 @@
 # 使用手册
 
-> 本文档记录使用操作指南，文档中的template是指目录docs/template
+> 本文档记录使用操作指南，文档中的template是指目录docs/template，示例：建立一个Flume模块的文档
 
 ### 1.template文件目录结构
 
@@ -16,8 +16,8 @@
 |    |-----README.md
 ```
 
-- _sidebar.md 是进入到template目录下的侧边栏
-- README.md 是进入到这个目录的首页显示页面
+- _sidebar.md 是进入到template模块下的侧边栏
+- README.md 是进入到这个模块的首页显示页面
 
 ### 2.复制template文件夹
 
