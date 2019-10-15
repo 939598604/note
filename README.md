@@ -9,11 +9,11 @@
   |-----template基本使用（文件夹）
   |-----template源码学习（文件夹）
   |-----_sidebar.md
-  |-----index.md
+  |-----README.md
 ```
 
 - _sidebar.md 是进入到template目录下的侧边栏
-- index.md 是进入到这个目录的首页显示页面
+- README.md 是进入到这个目录的首页显示页面
 
 ### 2.复制template文件夹
 
@@ -38,7 +38,7 @@
 
   **指定目录与md文档**  ：* [（一）安装部署](docs/Flume/Flume-ng基本使用/001.安装部署.md)
 
-### 4.修改index.md
+### 4.修改README.md
 
 ​      进入到目录要显示的内容
 
@@ -48,11 +48,11 @@
 
 ```markdown
 * 大数据
-  * [Flume](/docs/Flume/index.md)
-  * [Kafka](/docs/Kafka/index.md)
+  * [Flume](/docs/Flume/README.md)
+  * [Kafka](/docs/Kafka/README.md)
 ```
 
-将`Flume`指定到`/docs/Flume/index.md`路径
+将`Flume`指定到`/docs/Flume/README.md`路径
 
 ### 6.部署到githup
 
