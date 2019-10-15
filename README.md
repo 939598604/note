@@ -2,7 +2,7 @@
 
 > 本文档记录使用操作指南，文档中的template是指目录docs/template，示例：建立一个Flume模块的文档
 
-### 1.template文件目录结构
+##  1.template文件目录结构
 
 ```shell
 |-----------------docs（文件夹）
@@ -19,13 +19,13 @@
 - _sidebar.md 是进入到template模块下的侧边栏
 - README.md 是进入到这个模块的首页显示页面
 
-### 2.复制template文件夹
+## 2.复制template文件夹
 
 - 复制`template`，将其修改成将要修改的名称如:`Flume`
 - 将子文件中的 `template基本使用` 重命名为 `Flume-ng基本使用`
 - 将子文件中的 `template源码学习` 重命名为 `Flume-ng源码学习`
 
-### 3.修改侧边栏
+## 3.修改侧边栏
 
 - 修改_sidebar.md文件，将编写好的目录指定相关的md文件，如：
 
@@ -57,11 +57,11 @@
 
   **指定标题与md文档关系**  ：* [（一）安装部署](docs/大数据/Flume/Flume-ng基本使用/001.安装部署.md)
 
-### 4.修改README.md
+## 4.修改README.md
 
 ​      进入到目录要显示的内容，可以填写简介。
 
-### 5.指定导航栏路径
+## 5.指定导航栏路径
 
 ​     修改根目录下的`_navbar.md`文件，指定路径
 
@@ -73,6 +73,6 @@
 
 将`Flume`指定到`/docs/大数据/Flume/README.md`路径
 
-### 6.部署到githup
+## 6.部署到githup
 
 将本docsify代码提交到githup，打开githup page功能，如用域名访问必须提交域名文件。
