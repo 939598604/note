@@ -44,7 +44,7 @@
       * [（四）Channel组件分析](docs/大数据/Flume/Flume-ng源码/04.Channel组件.md)
       * [（五）FileChannel分析](docs/大数据/Flume/Flume-ng源码/05.FileChannel.md)
       * [（六）MemoryChannel分析](docs/大数据/Flume/Flume-ng源码/06.MemoryChannel.md)
-      * [（七）Sink组件析](docs/Flume/大数据/Flume-ng源码/07.Sink组件.md)
+      * [（七）Sink组件析](docs/大数据/Flume/Flume-ng源码/07.Sink组件.md)
       * [（八）avroSink分析](docs/大数据/Flume/Flume-ng源码/08.avroSink.md)
       * [（九）hdfsSink分析](docs/大数据/Flume/Flume-ng源码/09.hdfsSink.md)
       * [（十）kafkaSink分析](docs/大数据/Flume/Flume-ng源码/10.kafkaSink.md)
@@ -55,7 +55,7 @@
 
   **小标题**  ： Flume-ng基本使用 
 
-  **指定目录与md文档**  ：* [（一）安装部署](docs/Flume/Flume-ng基本使用/001.安装部署.md)
+  **指定目录与md文档**  ：* [（一）安装部署](docs/大数据/Flume/Flume-ng基本使用/001.安装部署.md)
 
 ### 4.修改README.md
 
