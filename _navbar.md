@@ -15,6 +15,7 @@
 * 大数据
   * [Hadoop](/docs/大数据/Hadoop/README.md)
   * [Yarn](/docs/大数据/Yarn/README.md)
+  * [MapReduce](/docs/大数据/MapReduce/README.md)
   * [Zookeeper](/docs/大数据/Zookeeper/README.md)
   * [Flume](/docs/大数据/Flume/README.md)
   * [Hive](/docs/大数据/Hive/README.md)
