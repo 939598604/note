@@ -313,9 +313,9 @@ body.sticky .sidebar-toggle {
   transition: left 250ms ease;
 }
 .markdown-section {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 30px 15px 40px 15px;
+  margin-left:350px;
+  max-width: 1000px;
+  padding: 5px 10px 10px 10px;
   position: relative;
 }
 .markdown-section > * {
