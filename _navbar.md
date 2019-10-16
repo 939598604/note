@@ -24,4 +24,4 @@
   * [Spark](/docs/大数据/Spark/README.md)
   * [Scala](/docs/大数据/Scala/README.md)
 * 其他
-  * [工具] (/docs/其他/001.hexo基本使用.md)
+  * [工具](/docs/其他/001.hexo基本使用.md)
