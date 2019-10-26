@@ -1,10 +1,17 @@
 * **Flume-ng**
   * **Flume-ng基本使用**
     * [（一）安装部署](docs/大数据/Flume/Flume-ng基本使用/001.安装部署.md)
-	* [（二）利用tail来采集数据到HDFS](docs/大数据/Flume/Flume-ng基本使用/002.利用tail来采集数据到HDFS.md)
-    * [（三）自定义Source](docs/大数据/Flume/Flume-ng基本使用/003.自定义Source.md)
-    * [（四）自定义Sink](docs/大数据/Flume/Flume-ng基本使用/004.自定义Sink.md)
-    * [（五）自定义Intercetor](docs/大数据/Flume/Flume-ng基本使用/005.自定义Intercetor.md)		
+	* [（二）利用tail来采集数据到HDFS](docs/大数据/Flume/Flume-ng基本使用/002.Flume各组件的配置.md)
+    * [（三）案例_tail采集本地文件数据到HDFS](docs/大数据/Flume/Flume-ng基本使用/003.案例_tail采集本地文件数据到HDFS.md)
+    * [（四）案例_spooldir采集本地文件夹的数据](docs/大数据/Flume/Flume-ng基本使用/004.案例_spooldir采集本地文件夹的数据.md)
+    * [（五）案例_Taildir采集本地文件夹的数据](docs/大数据/Flume/Flume-ng基本使用/005.案例_Taildir采集本地文件夹的数据.md)	
+	* [（六）案例_channel的副本机制](docs/大数据/Flume/Flume-ng基本使用/006.案例_channel的副本机制.md)
+	* [（七）sink的故障转移](docs/大数据/Flume/Flume-ng基本使用/007.案例_sink的故障转移.md)
+	* [（八）案例_sink的负载均衡](docs/大数据/Flume/Flume-ng基本使用/008.案例_sink的负载均衡.md)
+	* [（九）案例_flume的聚合](docs/大数据/Flume/Flume-ng基本使用/009.案例_flume的聚合.md)	
+	* [（十）自定义Intercetor](docs/大数据/Flume/Flume-ng基本使用/010.自定义Intercetor.md)	
+	* [（十一）自定义Source](docs/大数据/Flume/Flume-ng基本使用/011.自定义Source.md)	
+	* [（十二）自定义Sink](docs/大数据/Flume/Flume-ng基本使用/012.自定义Sink.md)	
   * **Flume-ng源码学习** 
     * [（一）入口程序启动分析](docs/大数据/Flume/Flume-ng源码/01.入口程序启动分析.md)
     * [（二）Source组件分析](docs/大数据/Flume/Flume-ng源码/02.Source组件.md)
