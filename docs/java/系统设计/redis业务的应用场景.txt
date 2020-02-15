@@ -1,0 +1,54 @@
+redis消息队列
+redis 投票，排行榜，热点排名
+
+异步消息队列 https://blog.csdn.net/wzbwzh/article/details/82876299
+redis如何实现延时队列
+https://www.bilibili.com/video/av52353516?p=8
+
+redis发布订阅实现各类定时业务（优惠券过期，商品不支付自动撤单，自动收货等）
+redis过期key监听
+单个实例可能断线，致使错过了接收延时消息。我们可以通过多实例尽可能的提高可靠性。：https://www.xici.net/d241295419.htm
+
+
+
+可以写成设计方案
+https://blog.csdn.net/weixin_30634661/article/details/96506207
+
+1.订单过期自动取消，比如下单30分钟未支付自动更改订单状态这类问题也可以使用此方法.
+
+2.需要每周一向用户推送通知,用户参与的视频会议开始前60min,15min,5min给其发送通知.用户关注会议开始前10min推送,还有其他两种通知.用户在线,即时收到;用户不在线,登录时收到.
+
+
+
+
+如何用redis来实现乐观锁秒杀功能
+redis实现秒杀抢票功能  http://www.pianshen.com/article/6124320559/
+一篇文章教你如何用 Redis 轻松实现秒杀系统的构思 https://blog.51cto.com/14456091/2424533
+
+基于Redis实现类似微信抢红包
+https://www.cnblogs.com/tlj2018/articles/10698787.html
+
+redis bitmap的应用场景
+https://blog.csdn.net/huangchunxia_1/article/details/80489444
+https://www.cnblogs.com/angelyan/p/11208370.html
+
+
+https://www.bilibili.com/video/av70912075?from=search&seid=8188467764329770158
+使用场景二：统计活跃用户
+使用时间作为cacheKey，然后用户ID为offset，如果当日活跃过就设置为1
+那么我该如果计算某几天/月/年的活跃用户呢(暂且约定，统计时间内只有有一天在线就称为活跃)，有请下一个redis的命令
+命令 BITOP operation destkey key [key ...]
+说明：对一个或多个保存二进制位的字符串 key 进行位元操作，并将结果保存到 destkey 上。
+说明：BITOP 命令支持 AND 、 OR 、 NOT 、 XOR 这四种操作中的任意一种参数
+
+
+
+
+
+
+
+
+
+学习
+https://www.cnblogs.com/qlqwjy/category/1055870.html
+
