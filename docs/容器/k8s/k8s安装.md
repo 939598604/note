@@ -16,9 +16,9 @@
 
 | 节点   | IP地址          |
 | ------ | --------------- |
-| master | 192.168.177.220 |
-| node1  | 192.168.177.221 |
-| node2  | 192.168.177.222 |
+| master | 192.168.197.33  |
+| node1  | 192.168.197.225 |
+| node2  | 192.168.197.226 |
 
 ## 二.环境准备
 
@@ -63,6 +63,7 @@ yum update
 时间校对，所有主机
 
 ```
+yum -y install ntpd
 systemctl start ntpd
 systemctl enable ntpd
 ntpdate ntp1.aliyun.com
@@ -73,17 +74,17 @@ hwclock -w
 
 ```
 ssh-keygen
-ssh-copy-id root@192.168.177.220
-ssh-copy-id root@192.168.177.221
-ssh-copy-id root@192.168.177.222
+ssh-copy-id root@192.168.197.33
+ssh-copy-id root@192.168.197.225
+ssh-copy-id root@192.168.197.226
 ```
 
 ### 2.6 修改hosts文件
 
 ```
-192.168.177.220 master etcd
-192.168.177.221 node1
-192.168.177.222 node2
+192.168.197.33 master etcd
+192.168.197.225 node1
+192.168.197.226 node2
 ```
 
 ### 2.7 关闭Swap交换分区；
@@ -133,8 +134,8 @@ yum install -y kubernetes-node flannel
 ```
 ETCD_NAME=default
 ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
-ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://192.168.177.220:2379"
-ETCD_ADVERTISE_CLIENT_URLS="http://192.168.177.220:2379"
+ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://192.168.197.33:2379"
+ETCD_ADVERTISE_CLIENT_URLS="http://192.168.197.33:2379"
 ```
 
 ### 4.2 启动服务
@@ -148,7 +149,7 @@ systemctl enable etcd
 
 ```
 [root@master ~]# etcdctl cluster-health   
-member 8e9e05c52164694d is healthy: got healthy result from http://192.168.177.220:2379
+member 8e9e05c52164694d is healthy: got healthy result from http://192.168.197.33:2379
 cluster is healthy
 ```
 
@@ -156,7 +157,7 @@ cluster is healthy
 
 ```
 [root@master ~]# etcdctl member list
-8e9e05c52164694d: name=default peerURLs=http://localhost:2380 clientURLs=http://192.168.177.220:2379 isLeader=true
+8e9e05c52164694d: name=default peerURLs=http://localhost:2380 clientURLs=http://192.168.197.33:2379 isLeader=true
 ```
 
 ### 4.5 配置etcd
@@ -175,9 +176,9 @@ cluster is healthy
 /atomic.io/network/subnets/172.16.69.0-24
 /atomic.io/network/subnets/172.16.6.0-24
 [root@master ~]# etcdctl get /atomic.io/network/subnets/172.16.6.0-24
-{"PublicIP":"192.168.177.221"}
+{"PublicIP":"192.168.197.225"}
 [root@master ~]# etcdctl get  /atomic.io/network/subnets/172.16.69.0-24
-{"PublicIP":"192.168.177.222"}
+{"PublicIP":"192.168.197.226"}
 ```
 
 ## 五. 配置master服务器
@@ -190,14 +191,15 @@ cluster is healthy
 KUBE_LOGTOSTDERR="--logtostderr=true"
 KUBE_LOG_LEVEL="--v=0"
 KUBE_ALLOW_PRIV="--allow-privileged=false"
-KUBE_MASTER="--master=http://192.168.177.220:8080"
+KUBE_MASTER="--master=http://192.168.197.33:8080"
+
 ```
 
 [root@master ~]# grep -v '^#' /etc/kubernetes/apiserver
 
 ```
 KUBE_API_ADDRESS="--insecure-bind-address=0.0.0.0"
-KUBE_ETCD_SERVERS="--etcd-servers=http://192.168.177.220:2379"
+KUBE_ETCD_SERVERS="--etcd-servers=http://192.168.197.33:2379"
 KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
 KUBE_ADMISSION_CONTROL="--admission-control=AlwaysAdmit"
 KUBE_API_ARGS=""
@@ -237,7 +239,7 @@ done
 
 ```
 [root@node1 ~]# grep -v '^#' /etc/sysconfig/flanneld 
-FLANNEL_ETCD_ENDPOINTS="http://192.168.177.220:2379"
+FLANNEL_ETCD_ENDPOINTS="http://192.168.197.33:2379"
 FLANNEL_ETCD_PREFIX="/atomic.io/network"
 FLANNEL_OPTIONS=""        
 ```
@@ -249,7 +251,7 @@ FLANNEL_OPTIONS=""
 KUBE_LOGTOSTDERR="--logtostderr=true"
 KUBE_LOG_LEVEL="--v=0"
 KUBE_ALLOW_PRIV="--allow-privileged=false"
-KUBE_MASTER="--master=http://192.168.177.220:8080"
+KUBE_MASTER="--master=http://192.168.197.33:8080"
 ```
 
 [root@node1 ~]# grep -v '^#' /etc/kubernetes/proxy                  
@@ -262,9 +264,9 @@ KUBE_PROXY_ARGS="--bind=address=0.0.0.0"
 
 ```
 [root@node1 ~]# grep -v '^#' /etc/kubernetes/kubelet 
-KUBELET_ADDRESS="--address=127.0.0.1"
-KUBELET_HOSTNAME="--hostname-override=192.168.177.221"
-KUBELET_API_SERVER="--api-servers=http://192.168.177.220:8080"
+KUBELET_ADDRESS="--address=192.168.197.225"
+KUBELET_HOSTNAME="--hostname-override=192.168.197.225"
+KUBELET_API_SERVER="--api-servers=http://192.168.197.33:8080"
 KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest"
 KUBELET_ARGS=""
 ```
@@ -286,7 +288,8 @@ node2与node1配置基本一致，除下面一处例外
 
 ```
 [root@node2 ~]# vi /etc/kubernetes/kubelet
-KUBELET_HOSTNAME="--hostname-override=192.168.177.222"
+KUBELET_ADDRESS="--address=192.168.197.226"
+KUBELET_HOSTNAME="--hostname-override=192.168.197.226"
 ```
 
 ## 八.查看节点
@@ -294,8 +297,8 @@ KUBELET_HOSTNAME="--hostname-override=192.168.177.222"
 ```
 [root@master ~]# kubectl get nodes   
 NAME          STATUS    AGE
-192.168.177.221   Ready     18h
-192.168.177.222   Ready     13h
+192.168.197.225   Ready     18h
+192.168.197.226   Ready     13h
 ```
 
 k8s支持2种方式,一种是直接通过命令参数的方式,另一种是通过配置文件的方式,配置文件的话支持json和yaml
@@ -306,9 +309,20 @@ k8s支持2种方式,一种是直接通过命令参数的方式,另一种是通�
 kubectl run nginx --image=nginx --port=80  --replicas=2
 ```
 
-## 十.遇到问题
+## 十 k8s之kubectl命令自动补全
 
-### 10.1 创建成功但是kubectl get pods 没有结果
+```
+yum install -y epel-release bash-completion
+source /usr/share/bash-completion/bash_completion
+
+
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
+
+## 十一.遇到问题
+
+### 11.1 创建成功但是kubectl get pods 没有结果
 
 **提示信息：**no API token found for service account default
 **解决办法：**
@@ -317,7 +331,7 @@ kubectl run nginx --image=nginx --port=80  --replicas=2
 编辑/etc/kubernetes/apiserver 去除 KUBE_ADMISSION_CONTROL中的SecurityContextDeny,ServiceAccount，并重启kube-apiserver.service服务
 ```
 
-### 10.2 pod-infrastructure:latest镜像下载失败
+### 11.2 pod-infrastructure:latest镜像下载失败
 
 **报错信息：**image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request. 
 **解决方案：**
@@ -326,10 +340,9 @@ kubectl run nginx --image=nginx --port=80  --replicas=2
 yum install *rhsm* -y
 ```
 
-### 10.3 登陆容器报错
+### 11.3 容器报错
 
-[root@node14 ~]# kubectl exec -it nginx-bl7lc /bin/bash
-Error from server: error dialing backend: dial tcp 192.168.177.222:10250: getsockopt: connection refused
+**问题1:Error from server: error dialing backend: dial tcp 192.168.197.226:10250: getsockopt: connection refused**
 **解决方法：**
 
 ```
@@ -338,3 +351,44 @@ Error from server: error dialing backend: dial tcp 192.168.177.222:10250: getsoc
 KUBELET_ADDRESS需要修改为node ip
 ```
 
+**问题2:Error from server (BadRequest): container "nginx" in pod "nginx-deployment-1998962726-p6rv5" is waiting to start: ContainerCreating**
+
+ **解决方法：**
+
+执行日志查看的时候：kubectl logs nginx-deployment-1998962726-p6rv5 出现
+
+```
+   Warning FailedSync      Error syncing pod, skipping: failed to "StartContainer" for "POD" with ImagePullBackOff: "Back-off pulling image \"registry.access.redhat.com/rhel7/pod-infrastructure:latest\""
+
+```
+
+fa
+
+**方法一**
+
+1.在node节点执行 yum install *rhsm*
+
+2.docker pull  registry.access.redhat.com/rhel7/pod-infrastructure:latest
+
+```
+[root@can225 ~]# docker pull  registry.access.redhat.com/rhel7/pod-infrastructure:latest
+Trying to pull repository registry.access.redhat.com/rhel7/pod-infrastructure ... 
+open /etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt: no such file or directory
+```
+
+ **方法二**
+
+```
+ wget http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm
+ rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv --to-stdout ./etc/rhsm/ca/redhat-uep.pem | tee /etc/rhsm/ca/redhat-uep.pem
+```
+
+ 前两个命令会生成/etc/rhsm/ca/redhat-uep.pem文件
+
+```
+docker pull registry.access.redhat.com/rhel7/pod-infrastructure:latest
+```
+
+ 
+
+ 
