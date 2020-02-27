@@ -333,3 +333,10 @@ docker stop $(docker ps -a | awk '{ print $1}' | tail -n +2)
 ```dart
 docker rm -f $(docker ps -a | awk '{ print $1}' | tail -n +2)
 ```
+
+**docker中 删除所有的镜像命令**
+
+```
+docker rmi -f $(docker images | awk '{ print $3}')
+```
+
