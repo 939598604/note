@@ -8,55 +8,49 @@
 
 ### 2.1.nodePort方式
 
-#### 2.1.1 新建Deployment
-
-vim nginx-deployment.yaml
-
-```
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  selector:
-    matchLabels:
-      app: nginx-deployment
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: nginx-deployment
-    spec:
-      containers:
-      - name: nginx-deployment
-        image: 192.168.197.224/gzstrong/nginx:latest
-```
-
-2.1.2 新建servcie
+#### 2.1.1 新建yml文件
 
 vim nginx-svc.yaml
 
-```bash
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: nginx-deployment
+  template:
+    metadata:
+      labels:
+        name: nginx-deployment
+    spec:
+      containers:
+        - name: nginx-deployment
+          image: 192.168.197.224/gzstrong/nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-svc
+  name: nginx-service-nodeport
 spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
   type: NodePort
   selector:
-    app: nginx-deployment
-  ports:
-  - protocol: TCP
-    nodePort: 30002
-    port: 8080
-    targetPort: 80
+    name: nginx-deployment
 ```
 
 新增'type: NodePort'和'nodePort: 30002'，通过NodePort方式外网访问pod，映射端口为30002，重新kubectl apply
 
  
-
-
 
 ```bash
 [root@master ~]# for i in {1..10};do sleep 1;curl 172.27.9.131:30002;done

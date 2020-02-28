@@ -228,6 +228,8 @@ systemctl status kubelet
 
 ### 3.4 k8s 镜像获取
 
+#### 替换镜像域名下载
+
 （1）查看集群使用的容器镜像
 
 ```
@@ -328,7 +330,9 @@ docker tag  gcr.azk8s.cn/google-containers/etcd:3.4.3-0 k8s.gcr.io/etcd:3.4.3-0
 docker tag  gcr.azk8s.cn/google-containers/coredns:1.6.5 k8s.gcr.io/coredns:1.6.5
 ```
 
-或者直接到坚果云下载镜像image.tar.gz
+#### 坚果云下载镜像image.tar.gz
+
+或者直接到坚果云https://www.jianguoyun.com/p/Da4u4T0Q3suRCBjwq-UC 下载镜像image.tar.gz
 
 ```
 docker load -i coredns_1_6_5.tar
@@ -353,10 +357,10 @@ docker load -i pause_3_1.tar
 kubeadm init --kubernetes-version=v1.17.3 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.197.33
 ```
 
-也可以指定service网络，忽略虚拟内存
+也可以指定service网络 
 
 ```
-kubeadm init --kubernetes-version=v1.17.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap
+kubeadm init --kubernetes-version=v1.17.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --apiserver-advertise-address=192.168.197.33
 ```
 
 初始化遇到的问题
@@ -1263,7 +1267,16 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 
 后面就是导入镜像了
 
+**对于Error from server (NotFound): pods "kube-proxy-jbv2p " not found的镜像镜像删除时，会提示“*error:* *the* *server* *doesn't* *have* *a* *resource* *type* "pods" ”**
 
+正确的处理方法：原因是之前加入节点时失败，导致存在了pod,应在主节点上正确的移除节点,然后进行重启
+
+```
+[root@k8smaster install]# kubectl delete node can225
+[root@k8smaster install]# reboot
+```
+
+重启之后发现之前的kube-proxy-jbv2p没有了
 
 ## 七.重新清除主节点的kubeadm生成的文件
 
