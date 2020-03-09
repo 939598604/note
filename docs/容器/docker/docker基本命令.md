@@ -90,3 +90,11 @@ docker rm -f $(docker ps -a | awk '{ print $1}' | tail -n +2)
 docker rmi -f $(docker images | awk '{ print $3}')
 ```
 
+**doceker删除none镜像**
+
+```
+docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker stop
+docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker rm
+docker images|grep none|awk '{print $3 }'|xargs docker rmi
+```
+
